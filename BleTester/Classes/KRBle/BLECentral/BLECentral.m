@@ -17,7 +17,15 @@ static CGFloat _kScanNeverStopTimeout = 0.0f;
     
 }
 
+@property (nonatomic, strong) NSMutableDictionary *discoveredServices;
+@property (nonatomic, assign) NSInteger rssi;
+@property (nonatomic, strong) NSDictionary *advertisementInfo;
+@property (nonatomic, strong) NSString *peripheralName;
+
 @property (nonatomic, assign) BOOL isScanning;
+@property (nonatomic, assign) BOOL isDisconnect;
+@property (nonatomic, assign) BOOL isConnecting;
+@property (nonatomic, assign) BOOL isConnected;
 
 @property (nonatomic, strong) TimeoutTimer *_timeoutTimer;
 @property (nonatomic, strong) TimeoutTimer *_intervalTimer;

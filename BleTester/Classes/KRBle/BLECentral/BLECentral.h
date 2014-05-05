@@ -100,27 +100,27 @@ typedef CGFloat(^BLECentralScanIntervalHandler)(void);
 @property (nonatomic, strong) id<BLECentralDelegate> delegate;
 
 //Central Manager
-@property (strong, nonatomic) CBCentralManager *centralManager;
+@property (nonatomic, strong) CBCentralManager *centralManager;
 //目前正在作用的 Peripheral
-@property (strong, nonatomic) CBPeripheral *discoveredPeripheral;
+@property (nonatomic, strong) CBPeripheral *discoveredPeripheral;
 //Peripheral 傳來的資料
-@property (strong, nonatomic) NSMutableData *combinedData;
+@property (nonatomic, strong) NSMutableData *combinedData;
 
 //已發現的服務與特徵碼資訊
-@property (nonatomic, strong) NSMutableDictionary *discoveredServices;
+@property (nonatomic, readonly) NSMutableDictionary *discoveredServices;
 //目前的 RSSI 強度
-@property (nonatomic, assign) NSInteger rssi;
+@property (nonatomic, readonly) NSInteger rssi;
 //接收到 Peripheral 的廣播資料
-@property (nonatomic, strong) NSDictionary *advertisementInfo;
+@property (nonatomic, readonly) NSDictionary *advertisementInfo;
 //Peripheral 設備名稱
-@property (nonatomic, strong) NSString *peripheralName;
+@property (nonatomic, readonly) NSString *peripheralName;
 
 //與 Peripheral 斷線
-@property (nonatomic, assign) BOOL isDisconnect;
+@property (nonatomic, readonly) BOOL isDisconnect;
 //與 Peripheral 正在嚐試連線
-@property (nonatomic, assign) BOOL isConnecting;
+@property (nonatomic, readonly) BOOL isConnecting;
 //與 Peripheral 已連線
-@property (nonatomic, assign) BOOL isConnected;
+@property (nonatomic, readonly) BOOL isConnected;
 //是否正在掃描附近裝置
 @property (nonatomic, readonly) BOOL isScanning;
 //是否在斷線時自動掃描
