@@ -17,6 +17,8 @@ static CGFloat _kScanNeverStopTimeout = 0.0f;
     
 }
 
+@property (nonatomic, assign) BOOL isScanning;
+
 @property (nonatomic, strong) TimeoutTimer *_timeoutTimer;
 @property (nonatomic, strong) TimeoutTimer *_intervalTimer;
 
@@ -66,6 +68,7 @@ static CGFloat _kScanNeverStopTimeout = 0.0f;
     self.isConnecting          = NO;
     self.isConnected           = NO;
     self.isSupportBLE          = NO;
+    self.isScanning            = NO;
     self.autoScan              = NO;
     
     //不要外部控制參數型的 Timeout，會不好管控流程，另開一支 Timeout Class 來做會最棒，也便於擴充
@@ -138,6 +141,7 @@ static CGFloat _kScanNeverStopTimeout = 0.0f;
 @synthesize isDisconnect                    = _isDisconnect;
 @synthesize isConnecting                    = _isConnecting;
 @synthesize isConnected                     = _isConnected;
+@synthesize isScanning                      = _isScanning;
 @synthesize autoScan                        = _autoScan;
 @synthesize isSupportBLE                    = _isSupportBLE;
 @synthesize bleState                        = _bleState;
@@ -183,7 +187,11 @@ static CGFloat _kScanNeverStopTimeout = 0.0f;
 -(void)startScanForServices:(NSArray *)_services timeout:(CGFloat)_timeout
 {
     //先停止 Scan
-    [self stopScan];
+    if (self.isScanning) {
+        [self stopScan];
+    }
+    
+    self.isScanning = YES;
     
     //self.scanTimeout = _timeout;
     if( self.centralManager )
@@ -269,6 +277,8 @@ static CGFloat _kScanNeverStopTimeout = 0.0f;
         [self.centralManager stopScan];
     }
     [self._timeoutTimer removeDifferPass];
+    
+    self.isScanning = NO;
 }
 
 #pragma --mark Disconnect Methods

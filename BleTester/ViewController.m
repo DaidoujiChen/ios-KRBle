@@ -11,7 +11,6 @@
 
 @interface ViewController ()
 
-@property (nonatomic, assign) BOOL _isScanning;
 @property (nonatomic, strong) NSTimer *_timer;
 
 @end
@@ -73,8 +72,6 @@
 @synthesize peripherals          = _peripherals;
 @synthesize bleCentral           = _bleCentral;
 
-@synthesize _isScanning;
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -91,7 +88,6 @@
     [self _fixIos7IssuesWithTableView];
     
     _peripherals    = [NSMutableArray new];
-    _isScanning     = NO;
     
     __weak typeof(self) _weakSelf = self;
     
@@ -141,16 +137,17 @@
 #pragma --mark IBActions
 -(IBAction)scan:(id)sender
 {
-    if( _isScanning )
+    UIBarButtonItem *btn = (UIBarButtonItem*) sender;
+    
+    if( _bleCentral.isScanning )
     {
-        _isScanning = NO;
+        btn.title = @"Scan";
         [_bleCentral stopScan];
-        
         //[self _stopTimer];
     }
     else
     {
-        _isScanning = YES;
+        btn.title = @"StopScan";
         [_peripherals removeAllObjects];
         [_tableView reloadData];
         [_bleCentral startScan];

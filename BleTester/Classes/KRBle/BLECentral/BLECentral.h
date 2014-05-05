@@ -121,6 +121,8 @@ typedef CGFloat(^BLECentralScanIntervalHandler)(void);
 @property (nonatomic, assign) BOOL isConnecting;
 //與 Peripheral 已連線
 @property (nonatomic, assign) BOOL isConnected;
+//是否正在掃描附近裝置
+@property (nonatomic, readonly) BOOL isScanning;
 //是否在斷線時自動掃描
 @property (nonatomic, assign) BOOL autoScan;
 //是否支援 BLE
